@@ -14,14 +14,14 @@ import { ENTRYPOINT_V6, ENTRYPOINT_V7 } from "../constants";
 export const processor = new EvmBatchProcessor()
   // Lookup archive by the network name in Subsquid registry
   // See https://docs.subsquid.io/evm-indexing/supported-networks/
-  .setGateway("https://v2.archive.subsquid.io/network/ethereum-mainnet")
+  .setGateway("https://v2.archive.subsquid.io/network/arbitrum-one")
   // Chain RPC endpoint is required for
   //  - indexing unfinalized blocks https://docs.subsquid.io/basics/unfinalized-blocks/
   //  - querying the contract state https://docs.subsquid.io/evm-indexing/query-state/
   .setRpcEndpoint(
     assertNotNull(
-      process.env.RPC_ETH_HTTP,
-      "Required env variable RPC_ETH_HTTP is missing",
+      process.env.RPC_ARBITRUM_ONE_HTTP,
+      "Required env variable RPC_ARBITRUM_ONE_HTTP is missing",
     ),
   )
   .setFinalityConfirmation(75)
@@ -31,7 +31,7 @@ export const processor = new EvmBatchProcessor()
     },
   })
   .setBlockRange({
-    from: 17012204, // entrypoint v6 deployment block https://etherscan.io/tx/0x2635de77fc9fc90cea0eca67fff403cafb34b9d8d3303b5276e45a09de463d8b
+    from: 78720307, // entrypoint v6 deployment block arbitrum https://arbiscan.io/tx/0xefaa1ddefc4c1077319a66b9f883b6ed71509bd76b61d78335f4b59fee821176
   })
   .addLog({
     address: [ENTRYPOINT_V6, ENTRYPOINT_V7],

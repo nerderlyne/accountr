@@ -8,7 +8,7 @@ import { convertTimestampMilliToSeconds } from "../utils";
 processor.run(
   new TypeormDatabase({
     supportHotBlocks: true,
-    stateSchema: "eth_processor",
+    stateSchema: "optimism_processor",
   }),
   async (ctx) => {
     const accountDeployedEvents: AccountDeployed[] = [];
@@ -28,7 +28,7 @@ processor.run(
           accountDeployedEvents.push(
             new AccountDeployed({
               id: log.id,
-              network: "eth",
+              network: "optimism",
               block: c.header.height,
               entryPoint: log.address.toLowerCase(),
               timestamp: new Date(
@@ -38,7 +38,7 @@ processor.run(
               sender: sender.toLowerCase(),
               factory: factory.toLowerCase(),
               paymaster: paymaster.toLowerCase(),
-              txHash: log.transactionHash.toLowerCase(),
+              txHash: log.transactionHash,
             }),
           );
         } else if (
@@ -56,7 +56,7 @@ processor.run(
           userOperationEvents.push(
             new UserOperationEvent({
               id: log.id,
-              network: "eth",
+              network: "optimism",
               block: c.header.height,
               entryPoint: log.address.toLowerCase(),
               timestamp: new Date(

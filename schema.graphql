@@ -1,10 +1,28 @@
-type Transfer @entity {
-  id: ID!
-  network: String! @index
-  block: Int! @index
-  timestamp: DateTime! @index
-  from: String! @index
-  to: String! @index
-  value: BigInt!
-  txHash: String! @index
+type AccountDeployed @entity {
+    id: ID!
+    network: String! @index
+    block: Int! @index
+    entryPoint: String! @index
+    timestamp: DateTime! @index
+    userOpHash: String! @index
+    sender: String! @index
+    factory: String!
+    paymaster: String!
+    txHash: String! @index
+}
+
+type UserOperationEvent @entity {
+    id: ID!
+    network: String! @index
+    block: Int! @index
+    entryPoint: String! @index
+    timestamp: DateTime! @index
+    userOpHash: String! @index
+    sender: String! @index
+    paymaster: String! @index
+    nonce: BigInt!
+    success: Boolean!
+    actualGasCost: BigInt!
+    actualGasUsed: BigInt!
+    txHash: String! @index
 }

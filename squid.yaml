@@ -1,18 +1,27 @@
 manifestVersion: subsquid.io/v0.1
-name: multichain-transfers-squid
+name: multichain-accounts-squid
 version: 1
-description: 'A squid that indexes USDC transfers on ETH and BSC'
-build: 
+description: "An indexer that tracks accounts on ETH, Arbitrum, Optimism, Base, and Polygon"
+build:
 deploy:
   addons:
     postgres:
     rpc:
       - eth.http # RPC proxy URL will be supplied via the RPC_ETH_HTTP env variable
-      - bsc.http # via RPC_BSC_HTTP here
+      - arbitrum-one.http # via RPC_ARBITRUM_HTTP here
+      - optimism.http # via RPC_OPTIMISM_HTTP here
+      - base.http # via RPC_BASE_HTTP here
+      - polygon.http # via RPC_POLYGON_HTTP here
   processor:
     - name: eth-processor
-      cmd: [ "sqd", "process:prod:eth" ]
-    - name: bsc-processor
-      cmd: [ "sqd", "process:prod:bsc" ]
+      cmd: ["sqd", "process:prod:eth"]
+    - name: arbitrum-processor
+      cmd: ["sqd", "process:prod:arbitrum"]
+    - name: optimism-processor
+      cmd: ["sqd", "process:prod:optimism"]
+    - name: base-processor
+      cmd: ["sqd", "process:prod:base"]
+    - name: polygon-processor
+      cmd: ["sqd", "process:prod:polygon"]
   api:
-    cmd: [ "sqd", "serve:prod" ]
+    cmd: ["sqd", "serve:prod"]
