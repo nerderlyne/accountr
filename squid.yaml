@@ -25,3 +25,8 @@ deploy:
       cmd: ["sqd", "process:prod:polygon"]
   api:
     cmd: ["sqd", "serve:prod"]
+scale:
+  addons:
+    postgres:
+      storage: 25G
+      profile: medium
