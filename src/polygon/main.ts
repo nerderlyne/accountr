@@ -3,7 +3,6 @@ import { AccountDeployed, UserOperationEvent } from "../model/generated";
 import * as entryPointAbi from "../abi/entryPoint";
 import { processor } from "./processor";
 import { ENTRYPOINT_V6, ENTRYPOINT_V7 } from "../constants";
-import { convertTimestampMilliToSeconds } from "../utils";
 
 processor.run(
   new TypeormDatabase({
@@ -31,9 +30,7 @@ processor.run(
               network: "polygon",
               block: c.header.height,
               entryPoint: log.address.toLowerCase(),
-              timestamp: new Date(
-                convertTimestampMilliToSeconds(c.header.timestamp),
-              ),
+              timestamp: new Date(c.header.timestamp),
               userOpHash: userOpHash.toLowerCase(),
               sender: sender.toLowerCase(),
               factory: factory.toLowerCase(),
@@ -59,9 +56,7 @@ processor.run(
               network: "polygon",
               block: c.header.height,
               entryPoint: log.address.toLowerCase(),
-              timestamp: new Date(
-                convertTimestampMilliToSeconds(c.header.timestamp),
-              ),
+              timestamp: new Date(c.header.timestamp),
               userOpHash: userOpHash.toLowerCase(),
               sender: sender.toLowerCase(),
               paymaster: paymaster.toLowerCase(),
